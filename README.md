@@ -1,5 +1,4 @@
-# new-year-cards
-New Year Cards in PostScript 
+# New Year Cards in PostScript 
 
 <img src="https://raw.githubusercontent.com/k16shikano/new-year-cards/master/2018/2018.png" width="150"> <img src="https://raw.githubusercontent.com/k16shikano/new-year-cards/master/2017/2017.png" width="150">  <img src="https://raw.githubusercontent.com/k16shikano/new-year-cards/master/2016/2016.png" width="150"> <img src="https://raw.githubusercontent.com/k16shikano/new-year-cards/master/2015/2015.png" width="150"> <img src="https://raw.githubusercontent.com/k16shikano/new-year-cards/master/2014/2014.png" width="150">
 
