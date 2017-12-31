@@ -1,0 +1,31 @@
+%!
+<< /PageSize [285 420] >> setpagedevice
+
+1 1 50 {
+    0 12 360 { % for
+        /i exch def
+
+        newpath
+        gsave
+            /r1 {rand 5 mod 2 div} def
+            /r2 {rand 2 mod 2 div} def
+            /r3 {rand 2 mod 2 div} def
+            r1 r2 r3 setrgbcolor
+            140 220 moveto
+            i rotate
+            /Times-Bold findfont 10 scalefont setfont
+            (                         ) show
+            0 10 20 { % for
+              /j exch def
+                /AgentOrange findfont j 12 add scalefont setfont
+                (2) show
+                /AgentOrange findfont j 14 add scalefont setfont
+                (0) show
+                /AgentOrange findfont j 16 add scalefont setfont
+                (1) show
+                /AgentOrange findfont j 18 add scalefont setfont
+               (0) show
+            } for
+        grestore
+    } for
+} for

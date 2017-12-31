@@ -1,0 +1,48 @@
+%!
+% Requies FireFight BB Font (http://www.1001fonts.com/firefight-bb-font.html)
+<< /PageSize [285 420] >> setpagedevice
+
+/setrandc {
+/r1 {rand 12 mod 2 div} def
+/r2 {rand 2 mod 2 div} def
+/r3 {rand 1 mod 2 div} def
+r1 r2 r3 setrgbcolor
+} def
+
+/ellipse { % def
+    /c 2 index def
+    { % for
+       /t exch def
+
+       /r1 {rand 4 mod 2 div} def
+       /r2 {rand 2 mod 2 div} def
+       /r3 {rand 2 mod 2 div} def
+
+       newpath
+        gsave
+         70 190 moveto
+         /x 80 t cos mul def
+         /y 220 t sin mul def
+         x y rmoveto
+         /xscale 2.0 t cos add 20 mul def
+         /yscale 1 t cos add 25 mul def
+         /FireFightBB findfont [xscale 20 20 yscale 0 0] makefont setfont
+         (2012) true charpath clip
+
+          newpath
+         0 70 490 { % for
+             /i exch def
+             gsave
+               100 190 translate
+               70 setlinewidth
+               r1 r2 r3 setrgbcolor
+               .5 1 scale 0 0 i 70 add 0 360 arc stroke
+             grestore
+         } for
+       grestore
+    } for
+} def
+
+0 12 360 ellipse
+102 6 258 ellipse % dense farside
+

@@ -1,0 +1,74 @@
+%!
+% Requires Titania Font (http://www.1001fonts.com/titania-font.html)
+<< /PageSize [285 420] >> setpagedevice
+
+/ctransform { load
+  /f exch def
+  [{[3 1 roll f {moveto}]}
+   {[3 1 roll f {lineto}]}
+   {[7 1 roll
+     f 6 2 roll
+     f 6 2 roll
+     f 6 2 roll
+     {curveto}]}
+   {[{closepath}]}
+   pathforall
+  ]
+  newpath
+  {aload pop exec} forall
+} def
+
+/f { % u = (x^2-y^2) / 200, v = 2xy / 100
+  /y exch def
+  /x exch def
+  x dup mul y dup mul sub 150 div
+  1.2 x mul y mul 100 div
+} def
+
+/fcn { % u = ((x-100)^2-y^2) / 7 , v = 1.2xy / 7
+  /y exch def
+  /x exch def
+  x 100 sub dup mul y dup mul sub 28 div
+  1.2 x mul y mul 7 div
+} def
+
+/setrandcolor {
+  /m exch .4 add def
+  /r1 {rand 5 mod 1 div m add} def
+  /r2 {rand 2 mod 3 div m add} def
+  /r3 {rand 2 mod 3 div m add} def
+  r1 r2 r3 setrgbcolor
+} def
+
+/randcgrid {
+  newpath
+    0 2 300 {
+      /i exch def
+      i 0 exch moveto 200 0 rlineto /f ctransform
+      i 400 div setrandcolor stroke} for
+    0 2 200 {
+      /i exch def
+      i 0 moveto 0 300 rlineto /f ctransform
+      i 300 div setrandcolor stroke} for
+} def
+
+/xoffset 200 def
+
+xoffset 10 add -10 translate randcgrid
+0 xoffset sub 20 translate
+0 0 moveto
+newpath
+/Titania findfont 11 scalefont setfont
+0.7 0.1 0.1 setrgbcolor
+12 5.5 moveto
+(2008 2009 2010 2011 2012 2013 2014) true charpath
+/fcn ctransform clip
+fill
+newpath
+1 0.2 0 setrgbcolor
+120 setlinewidth
+145 140 moveto
+145 400 lineto
+
+stroke
+showpage

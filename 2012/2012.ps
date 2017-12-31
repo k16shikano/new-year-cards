@@ -1,0 +1,72 @@
+%!
+% Requies Sixties Font (http://www.fontriver.com/font/sixties/)
+<< /PageSize [285 420] >> setpagedevice
+
+/fun { % y=x^2/81 for x<9, y=(x-18)^2/81 for x>=9
+  dup 9 le {dup mul 81 div} {18 sub dup mul 81 div} ifelse
+} def
+
+/colwidth 62 def % set column width
+/xoffset 15 def
+/linehfactor 1.3 def
+/fontsize 170 def
+/numfont {
+    /Sixties
+} def
+
+/setrandcolor { % def
+  /m exch def
+  /r1 {rand 10 mod 7 div 1 m fun sub mul m 9 eq {1 add} if} def
+  /r2 {rand 10 mod 7 div 1 m fun sub mul 0 add} def
+  /r3 {rand 10 mod 7 div 1 m fun sub mul 0 add} def
+  r1 r2 r3 setrgbcolor
+} def
+
+/centeringchar { % def
+  dup stringwidth pop
+  colwidth exch sub 2 div 0 rmoveto
+} def % remaining a character string on top of the opstack
+
+/drawyear { % def
+0 1 3 { % for
+  /i exch def
+  i colwidth mul 0 rmoveto
+  [3 1 2 3] i get % map (+1) (2 0 1 2)
+  /base exch def
+  0 1 10 { % for
+    /t exch def
+    /num t base add 10 mod def
+    /f {i 3 eq {12} {9} ifelse} def
+    /h {t 9 mul fun 2 mul f add} def
+    numfont findfont
+      [fontsize 1 0 linehfactor h mul 1 0]
+      makefont setfont
+    t setrandcolor
+    num 10 1 string cvrs
+    currentpoint
+      /y exch def
+      /x exch def
+    centeringchar
+    true charpath gsave fill grestore
+    0.5 setgray stroke
+    x h y add moveto
+  } for
+  xoffset 0 moveto
+} for
+} def
+
+1 1 15 { % for
+    /n exch def
+
+    xoffset 0 moveto
+    drawyear
+
+    250 25 moveto
+    0 setgray
+    /Palatino-Bold-Italic findfont 12 scalefont setfont
+    n =string cvs show
+    0 -2 rmoveto (/) show
+    0 -2 rmoveto (15) show
+    showpage 
+} for
+

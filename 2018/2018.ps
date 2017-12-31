@@ -1,0 +1,84 @@
+%!
+<< /PageSize [285 420] >> setpagedevice
+
+% excerpt from Bill Casselman's 
+% "Mathematical Illustrations - a manual of geometry and PostScript"
+/ctransform { load
+    1 dict begin
+    /f exch def
+    [{[3 1 roll f {moveto}]}
+     {[3 1 roll f {lineto}]}
+     {[7 1 roll
+       f 6 2 roll
+       f 6 2 roll
+       f 6 2 roll
+       {curveto}]}
+     {[{closepath}]}
+     pathforall]
+    newpath
+    {aload pop exec} forall
+    end
+} def
+
+/f {/y exch def
+    /x exch def
+    x y fsub 2.7 y mul cos mul
+    y x fsub 3 y mul cos mul
+} def
+
+/fsub { % u = sin (a √(27 - (b^2 / 8))) * 450
+    /b exch def
+    /a exch def
+    a 27 b dup mul 8 div sub sqrt mul sin 450 mul
+} def
+
+/setrandcolor { % def
+    /r1 {rand 5 mod 3 div} def
+    /r2 {rand 7 mod 5 div} def
+    /r3 {rand 5 mod 3 div} def
+    r1 r2 r3 setrgbcolor
+} def
+
+1 1 20 { % for
+
+    /n exch def
+
+    newpath
+    /ShowcardGothic-Reg findfont 4 scalefont setfont
+    0 9 moveto (1820) true charpath
+    0 6 moveto (2018) true charpath
+    0 3 moveto (1820) true charpath
+    0 0 moveto (2018) true charpath
+    /f ctransform
+    gsave
+
+    clip
+    newpath
+    /j {
+        /x exch def
+        rand x mod x div 30 mul
+    } def
+
+    0 5 400 {
+        /i exch def
+        10 j setlinewidth
+         setrandcolor
+         0 i moveto
+         300 i lineto
+         stroke
+     } for
+ 
+     grestore
+     currentlinewidth 2 div setlinewidth
+     0.1 0 0 setrgbcolor 
+     stroke
+ 
+     3 410 moveto
+     /Georgia-Italic findfont 10 scalefont setfont
+     0.3 0.2 0.2 setrgbcolor
+     n =string cvs show
+     (/20) show
+ 
+     showpage
+ } for
+ 

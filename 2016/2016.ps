@@ -1,0 +1,53 @@
+%!PS
+% Requires Bill Casselman's ps3d.inc and DS Chocolade Font (http://www.1001fonts.com/ds-chocolade-font.html)
+% Needs -dNOSAFER option to gs
+(C:\\TEMP\\ps3d.inc) run 
+<< /PageSize [285 420] >> setpagedevice
+
+-70 0 100 translate3d
+[0 0 690 2] set-eye
+[2 1 0.5] -45 rotate3d
+
+/setrandcolor {% def
+    /r1 {rand 5 mod 3 div} def
+    /r2 {rand 4 mod 4 div} def
+    /r3 {rand 3 mod 4 div} def
+    r1 r2 r3 setrgbcolor
+} def
+
+/DS-Chocolade findfont [140 0 0 400 0 0] makefont setfont
+
+1 1 20 { % for
+
+  newpath
+  0 1 20 { % for
+    /y exch def
+    0 y 320 mul moveto
+    (2016) true charpath
+  } for
+  2d-path-convert
+  clip
+  gsave
+
+  newpath
+  0 20 300 { % for
+    /x exch def
+    /w 20 def
+    gsave
+      x 0 0 moveto3d
+      x w add 0 0 lineto3d
+      x w add 6000 0 lineto3d
+      x 6000 0 lineto3d
+      x 0 0 lineto3d
+      closepath
+      setrandcolor
+      fill
+      grestore
+  } for
+
+  grestore
+  0.7 0 0.1 setrgbcolor
+  stroke
+  showpage
+} for
+

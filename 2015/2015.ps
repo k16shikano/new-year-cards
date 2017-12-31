@@ -1,0 +1,36 @@
+%!
+% Requires Legrand Font (http://www.1001fonts.com/legrand-font.html)
+<< /PageSize [285 420] >> setpagedevice
+
+/setrandcolor {% def
+  /m exch def
+  /r1 {m 10 7.7 exp mul rand div} def
+  /r2 {m 10 7.3 exp mul rand div} def
+  /r3 {m 10 7.2 exp mul rand div} def
+  r1 r2 r3 setrgbcolor
+} def
+
+/randdirection {rand 7 mod 3 div} def
+
+/f {% def
+  /i exch def
+  /Legrand findfont
+  i 10 add scalefont setfont
+  randdirection 105 add rotate
+  -100 randdirection 200 mul moveto
+  1 1 10 { (2015 ) false charpath pop} for
+  gsave
+  i 5 div setrandcolor fill
+  grestore
+  1 1 0.9 setrgbcolor stroke
+} def
+
+1 1 1 {% for
+  /n exch def
+  1.2 setlinewidth
+  -100 100 translate
+  0 0 moveto
+  100 rotate
+  20 2 70 {f} for
+  showpage 
+} for

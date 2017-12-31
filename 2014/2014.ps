@@ -1,0 +1,53 @@
+%!
+% Requires Titania Font (http://www.1001fonts.com/titania-font.html)
+<< /PageSize [285 420] >> setpagedevice
+
+/setrandcolor {
+  /m exch .1 add def
+  /r1 {rand 5 mod 1 div m add} def
+  /r2 {rand 3 mod 3 div m add} def
+  /r3 {rand 3 mod 3 div m add} def
+  r1 r2 r3 setrgbcolor
+} def
+
+/f {% def
+    dup dup dup
+    4 mod 0 eq {(2) 4 1 roll -1 0 rmoveto} if 
+    4 mod 1 eq {(0) 3 1 roll -3 0 rmoveto} if 
+    4 mod 2 eq {(1) 2 1 roll -3 0 rmoveto} if 
+    4 mod 3 eq {(4 ) -5 0 rmoveto} if
+} def
+
+/drawyear { % def
+  4 1 64 {% for
+    /i exch def
+    /v { i i mul i mul 0.0003 mul } def
+    /w { i 15 add 2 div } def
+    /d { -360 w mul 2 3.1415 mul 65 mul div } def
+    d rotate
+    /Titania findfont
+    2 w mul scalefont setfont
+    v 0 rmoveto
+    0.001 setrandcolor
+    i f show
+  } for
+} def
+
+1 1 20 { % for
+    /n exch def
+
+    93 160 translate 
+    135 rotate
+    0 0 moveto
+    drawyear
+
+    100 rotate
+    150 -140 moveto
+    0 setgray
+    /Palatino-Bold-Italic findfont 12 scalefont setfont
+    n =string cvs show
+    0 -2 rmoveto (/) show
+    0 -2 rmoveto (20) show
+    showpage 
+} for
+

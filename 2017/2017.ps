@@ -1,0 +1,66 @@
+%!PS
+<< /PageSize [285 420] >> setpagedevice
+
+/setrandcolor {% def
+    /r1 {rand 5 mod 3 div} def
+    /r2 {rand 4 mod 4 div} def
+    /r3 {rand 3 mod 4 div} def
+    r1 r2 r3 setrgbcolor
+} def
+
+/f {% def
+    dup dup dup
+    4 mod 0 eq {(2) 4 1 roll -1 0 rmoveto} if 
+    4 mod 1 eq {(0) 3 1 roll -3 0 rmoveto} if 
+    4 mod 2 eq {(1) 2 1 roll -3 0 rmoveto} if 
+    4 mod 3 eq {(7 ) -5 0 rmoveto} if
+} def
+
+/i 4 def
+
+/lineto-chars { % def
+  /ex x def /ey y def
+  /y exch def /x exch def
+  /d x ex sub dup mul y ey sub dup mul add sqrt def
+  /R y ey sub x ex sub atan def
+  R rotate
+  { d 0 le % ifelse
+    { exit }
+    { setrandcolor 
+      /ra rand 5 mod 3 div 10 mul 22 add def
+      /Georgia-Bold findfont
+      [25 0 0 ra 0 0] makefont setfont
+      i f show
+      /i i 1 add def
+      /d d 7 sub def }
+  ifelse
+  } loop
+  0 R sub rotate
+} def
+
+1 1 22 { % for
+  /n exch def
+
+  newpath
+  0 0 moveto
+  135  45 moveto
+   85 140
+  110 165
+  110 130 curveto
+  0 0 moveto
+  150 130 moveto
+  155 190
+  210 140
+  130  40 curveto
+  flattenpath
+  {/y exch def /x exch def}{lineto-chars}{}{} pathforall
+  gsave
+  
+  32 230 moveto
+  0.9 0.1 0.2 setrgbcolor
+  /Georgia-Bold findfont [90 0 0 100 0 0] makefont setfont
+  (2017) show
+  
+  grestore
+  showpage
+} for
