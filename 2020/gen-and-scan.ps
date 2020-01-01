@@ -21,9 +21,14 @@
         {% ifelse
             4 -2 roll exch dup % array \ array value \ **** \ array index \ result \ result 
             4 -2 roll exch     % array \ array value \ result \ result \ array index \ ****
-            highlighted-year
-            putinterval % array \ array value \ result
-            exch pop % array \ result
+            2 index 2 index get type /arraytype ne
+            { % ifelse
+                highlighted-year
+                putinterval % array \ array value \ result
+                exch pop % array \ result
+            }{ % else
+                pop pop pop exch pop
+            } ifelse
         }{% else
             3 index 3 index get null eq
             { % ifelse
