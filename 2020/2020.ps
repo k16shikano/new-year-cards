@@ -5,8 +5,8 @@
 
 /setrandcolor { % def
     /r1 {rand 50 mod 7 div} def
-    /r2 {rand 5 mod 12 div} def
-    /r3 {rand 5 mod 12 div} def
+    /r2 {rand 11 mod 11 div} def
+    /r3 {rand 11 mod 11 div} def
     r1 r2 r3 setrgbcolor
 } def
 
@@ -16,11 +16,10 @@
     0 1 a length 1 sub { % for
         /n exch def
         a n get type /arraytype eq { % ifelse
-%            setrandcolor
-            1 0 0 setrgbcolor
+            setrandcolor
             a n get 0 get =string cvs show
         }{ % else
-            0.6 0.6 0.6 setrgbcolor
+            0.98 0.95 0.96 setrgbcolor
             a n get =string cvs show
         } ifelse
     } for
@@ -28,8 +27,9 @@
 
 1 1 20 { % for
 
-    /n exch def
+    /i exch def
 
+    /SaucerBB.ttf findfont 10 scalefont setfont
     newpath
     400 -12 0 { %for
         0 exch moveto
@@ -44,9 +44,9 @@
     stroke
     
     3 410 moveto
-    /Georgia-Italic findfont 5 scalefont setfont
+    /Georgia-Italic findfont 4 scalefont setfont
     0.3 0.2 0.2 setrgbcolor
-    n =string cvs show
+    i =string cvs show
     (/20) show
     
     showpage
