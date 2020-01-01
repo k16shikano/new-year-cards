@@ -1,0 +1,54 @@
+%!
+<< /PageSize [285 420] >> setpagedevice
+
+(gen-and-scan.ps) run
+
+/setrandcolor { % def
+    /r1 {rand 50 mod 7 div} def
+    /r2 {rand 5 mod 12 div} def
+    /r3 {rand 5 mod 12 div} def
+    r1 r2 r3 setrgbcolor
+} def
+
+/show-array % array -> IO
+{ % def
+    /a exch def
+    0 1 a length 1 sub { % for
+        /n exch def
+        a n get type /arraytype eq { % ifelse
+%            setrandcolor
+            1 0 0 setrgbcolor
+            a n get 0 get =string cvs show
+        }{ % else
+            0.6 0.6 0.6 setrgbcolor
+            a n get =string cvs show
+        } ifelse
+    } for
+} def
+
+1 1 20 { % for
+
+    /n exch def
+
+    newpath
+    400 -12 0 { %for
+        0 exch moveto
+        50 rand-array
+        scan-and-replace show-array
+    } for
+    gsave
+    
+    grestore
+    currentlinewidth 2 div setlinewidth
+    0.1 0 0 setrgbcolor
+    stroke
+    
+    3 410 moveto
+    /Georgia-Italic findfont 5 scalefont setfont
+    0.3 0.2 0.2 setrgbcolor
+    n =string cvs show
+    (/20) show
+    
+    showpage
+} for
+ 
