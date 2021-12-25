@@ -1,0 +1,59 @@
+%!
+<< /PageSize [285 420] >> setpagedevice
+
+/dense 3 def
+10 setflat
+
+/origin {
+    /fromy exch def /fromx exch def
+    /originx fromx def /originy fromy def
+    fromx fromy transform
+    /cpy exch def /cpx exch def
+} def
+
+/togoal {
+    /toy exch def /tox exch def
+    /dist tox fromx sub dup mul toy fromy sub dup mul add sqrt def
+
+    gsave
+    cpx cpy itransform translate
+    toy fromy sub tox fromx sub atan rotate
+    0 0 moveto
+    next 1 dist dense div next add 1 sub {
+        /i exch def /next i 1 add 4 mod def
+        setrandcolor 
+        i 4 mod 0 ne {(2) showchar} {(0) showchar} ifelse
+    } for
+    grestore
+
+    /fromx tox def /fromy toy def
+    fromx fromy transform
+    /cpy exch def /cpx exch def
+} def
+
+/setrandcolor { % def
+    /r1 {rand 5 mod 2 div} def
+    /r2 {rand 7 mod 6 div} def
+    /r3 {rand 5 mod 4 div} def
+    r1 r2 r3 setrgbcolor
+} def
+
+/showchar {
+    dup show stringwidth pop 0 exch sub dense add 0 rmoveto
+} def
+
+/Helvetica-Bold findfont 210 scalefont setfont
+90 rotate
+5 -220 moveto (2) true charpath
+/Helvetica-Bold findfont 190 scalefont setfont
+-10 20 rmoveto (0) true charpath
+/Helvetica-Bold findfont 220 scalefont setfont
+-12 15 rmoveto (2) true charpath
+-30 -65 rmoveto (2) true charpath
+flattenpath
+
+/Helvetica findfont 3 dense mul scalefont setfont
+/next 0 def
+{origin} {togoal} {} {} pathforall
+
+showpage
