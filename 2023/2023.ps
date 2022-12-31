@@ -31,7 +31,7 @@ tempdict /savedmatrix matrix put
 /theyear {%
     initmatrix
     tempdict begin
-    /Helvetica-Bold findfont
+    /SHOWG.TTF findfont
     12 scalefont setfont
     0 0 moveto
     1 15 420 { %for
@@ -42,12 +42,11 @@ tempdict /savedmatrix matrix put
     end
 } def
 
-/fillgradient {
+/fillrabit {
     initmatrix
-    0 0 moveto
     0 1 420 {% for
         /i exch def
-        i 210 add 210 div log 0.35 mul 0.3 1 sethsbcolor
+        1 i 1 420 div mul 1 sethsbcolor
         newpath
         0 i moveto
         285 i lineto
@@ -56,14 +55,14 @@ tempdict /savedmatrix matrix put
     } for
 }def
 
-/fillrgradient {
+/fillyear {
     initmatrix
     60 rotate
     50 -420 translate
     0 0 moveto
     0 1 500 {% for
         /i exch def
-        i 50 add 210 div log 0.5 mul i 200 add 400 div 1 sethsbcolor
+        i 210 add 300 div log 0.5 mul i 200 add 400 div 1 sethsbcolor
         newpath
         i 0 moveto
         i 1000 lineto
@@ -74,20 +73,14 @@ tempdict /savedmatrix matrix put
 
 gsave
 
-newpath face clip
-fillgradient
-newpath theyear clip
-fillrgradient
+newpath face clip fillrabit
+newpath theyear clip fillyear
 
-10 92 ear clip
-fillgradient
-newpath theyear clip
-fillrgradient
+10 92 ear clip fillrabit
+newpath theyear clip fillyear
 
--10 192 ear clip
-fillgradient
-newpath theyear clip
-fillrgradient
+-10 192 ear clip fillrabit
+newpath theyear clip fillyear
 
 grestore
 
