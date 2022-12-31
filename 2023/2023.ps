@@ -1,0 +1,94 @@
+%!
+<< /PageSize [285 420] >> setpagedevice
+
+/tempdict 8 dict def
+tempdict /savedmatrix matrix put
+
+/face {%
+    initmatrix
+    tempdict begin
+    142 200 translate
+    1 0.65 scale
+    0 0 100 0 360 arc
+    savedmatrix setmatrix
+    end
+} def
+
+/ear {%
+    grestore
+    initmatrix
+    /x exch def
+    /r exch def
+    tempdict begin
+    x 300 translate
+    r rotate 1.5 5 scale
+    newpath 0 0 20 0 360 arc
+    savedmatrix setmatrix
+    end
+    gsave
+} def
+
+/theyear {%
+    initmatrix
+    tempdict begin
+    /Helvetica-Bold findfont
+    12 scalefont setfont
+    0 0 moveto
+    1 15 420 { %for
+        0 exch moveto
+        { currentpoint pop 285 gt { exit } { (2023 ) true charpath } ifelse } loop
+    } for
+    savedmatrix setmatrix
+    end
+} def
+
+/fillgradient {
+    initmatrix
+    0 0 moveto
+    0 1 420 {% for
+        /i exch def
+        i 210 add 210 div log 0.35 mul 0.3 1 sethsbcolor
+        newpath
+        0 i moveto
+        285 i lineto
+        1 setlinewidth
+        stroke
+    } for
+}def
+
+/fillrgradient {
+    initmatrix
+    60 rotate
+    50 -420 translate
+    0 0 moveto
+    0 1 500 {% for
+        /i exch def
+        i 50 add 210 div log 0.5 mul i 200 add 400 div 1 sethsbcolor
+        newpath
+        i 0 moveto
+        i 1000 lineto
+        1 setlinewidth
+        stroke
+    } for
+}def
+
+gsave
+
+newpath face clip
+fillgradient
+newpath theyear clip
+fillrgradient
+
+10 92 ear clip
+fillgradient
+newpath theyear clip
+fillrgradient
+
+-10 192 ear clip
+fillgradient
+newpath theyear clip
+fillrgradient
+
+grestore
+
+showpage
