@@ -1,0 +1,32 @@
+/drawDragon {%
+  3 1 roll exch moveto 
+  /lrduArray exch def
+  0 1 lrduArray length 1 sub {
+    /i exch def
+    lrduArray i get 0 eq {2 0 rlineto} if % right
+    lrduArray i get 1 eq {-2 0 rlineto} if % left
+    lrduArray i get 2 eq {0 2 rlineto} if % up
+    lrduArray i get 3 eq {0 -2 rlineto} if % down
+  } for
+} def
+
+/expandCurve {%
+  /arr exch def
+  /len arr length def
+  /newarr len 2 mul array def
+  arr newarr copy pop
+  len 1 sub -1 0 {
+    /i exch def
+    /v {arr i get} def
+    0 v eq {newarr len 2 mul 1 sub i sub 3 put} if
+    1 v eq {newarr len 2 mul 1 sub i sub 2 put} if
+    2 v eq {newarr len 2 mul 1 sub i sub 0 put} if
+    3 v eq {newarr len 2 mul 1 sub i sub 1 put} if
+  } for
+  newarr
+} def
+
+newpath
+220 400 [2 0 3 0] 0 1 13 { pop expandCurve } for drawDragon
+stroke
+showpage

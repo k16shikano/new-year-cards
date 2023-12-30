@@ -1,0 +1,51 @@
+%!
+<< /PageSize [285 420] >> setpagedevice
+
+/drawDragon {%
+  3 1 roll exch moveto 
+  /lrduArray exch def
+  currentpoint /y exch def /x exch def
+  0 1 lrduArray length 1 sub {
+    /i exch def
+    lrduArray i get 0 eq {gsave x y moveto x 4 add y lineto strokerandcolor} if % right
+    lrduArray i get 1 eq {gsave x y moveto x 4 sub y lineto strokerandcolor} if % left
+    lrduArray i get 2 eq {gsave x y moveto x y 4 add lineto strokerandcolor} if % up
+    lrduArray i get 3 eq {gsave x y moveto x y 4 sub lineto strokerandcolor} if % down
+  } for
+} def
+
+/expandCurve {%
+  /arr exch def
+  /len arr length def
+  /newarr len 2 mul array def
+  arr newarr copy pop
+  len 1 sub -1 0 {
+    /i exch def
+    /v {arr i get} def
+    0 v eq {newarr len 2 mul 1 sub i sub 3 put} if
+    1 v eq {newarr len 2 mul 1 sub i sub 2 put} if
+    2 v eq {newarr len 2 mul 1 sub i sub 0 put} if
+    3 v eq {newarr len 2 mul 1 sub i sub 1 put} if
+  } for
+  newarr
+} def
+
+/strokerandcolor { % def
+  /r1 {rand 5 mod 2 div 1 div} def
+  /r2 {rand 7 mod 6 div 1.5 div} def
+  /r3 {rand 5 mod 4 div 1.5 div} def
+  r1 r2 r3 setrgbcolor
+  currentpoint /y exch def /x exch def stroke
+} def
+
+1 1 20 { % for
+  /i exch def
+
+  newpath
+  1 setlinecap
+  0.7 setlinewidth
+  315 100 [2 0 3 0] 0 1 9 { pop expandCurve } for drawDragon
+  270 340 moveto 90 rotate /SaucerBB.ttf findfont 20 scalefont setfont (2024) show
+  showpage
+
+} for
