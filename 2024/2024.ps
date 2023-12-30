@@ -7,10 +7,10 @@
   currentpoint /y exch def /x exch def
   0 1 lrduArray length 1 sub {
     /i exch def
-    lrduArray i get 0 eq {gsave x y moveto x 4 add y lineto strokerandcolor} if % right
-    lrduArray i get 1 eq {gsave x y moveto x 4 sub y lineto strokerandcolor} if % left
-    lrduArray i get 2 eq {gsave x y moveto x y 4 add lineto strokerandcolor} if % up
-    lrduArray i get 3 eq {gsave x y moveto x y 4 sub lineto strokerandcolor} if % down
+    lrduArray i get 0 eq {x y moveto x 4 add y lineto strokerandcolor} if % right
+    lrduArray i get 1 eq {x y moveto x 4 sub y lineto strokerandcolor} if % left
+    lrduArray i get 2 eq {x y moveto x y 4 add lineto strokerandcolor} if % up
+    lrduArray i get 3 eq {x y moveto x y 4 sub lineto strokerandcolor} if % down
   } for
 } def
 
