@@ -1,0 +1,88 @@
+%!
+<< /PageSize [285 420] >> setpagedevice
+
+/setrandcolor { % def
+    /r1 {rand 23 mod 7 div} def
+    /r2 {rand 7 mod 11 div} def
+    /r3 {rand 7 mod 9 div} def
+    r1 r2 r3 setrgbcolor
+} def
+
+/dense 10 def
+2 setflat
+
+/movetonext {
+  stringwidth pop 0 exch sub 2 dense mul add 0 rmoveto
+} def
+
+/showchar {
+  charcol show
+} def
+
+/origin {
+    /fromy exch def /fromx exch def
+    /originx fromx def /originy fromy def
+    fromx fromy transform
+    /cpy exch def /cpx exch def
+} def
+
+/togoal {
+    /toy exch def /tox exch def
+    /dist tox fromx sub dup mul toy fromy sub dup mul add sqrt def
+
+    gsave
+    cpx cpy itransform translate
+    toy fromy sub tox fromx sub atan rotate
+    0 0 moveto
+    next 1 dist dense div next add 1 sub {
+        /i exch def /next i 1 add 4 mod def
+        i 1 add 4 mod 0 eq {
+          (5) dup showchar movetonext
+        }{
+          i 1 add 2 mod 0 eq { (0) dup showchar movetonext } { (2) dup showchar movetonext } ifelse
+        } ifelse
+    } for
+    grestore
+
+    /fromx tox def /fromy toy def
+    fromx fromy transform
+    /cpy exch def /cpx exch 1 mul def
+} def
+
+/SHOWG.TTF findfont 19 scalefont setfont
+
+gsave
+1 1 20 { % for
+  /j exch def
+  
+  %gsave
+  %/showrealpage /showpage load def
+  %/showpage {} def
+  %265 170 translate
+  %190 rotate
+  %0.3 0.3 scale
+  %(photo.eps) run
+  %grestore
+  
+  gsave
+  200 -220 translate
+  /next 0 def
+  0 1 15 {
+    gsave
+    /i exch def
+    /charcol {setrandcolor} def
+    i 2 mod 0 ne {
+      -1 1 scale -280 0 translate
+      /charcol {0.8 setgray} def
+    } if
+    140 i 21 mul 200 sub 600 0 180 arc
+    flattenpath
+    {origin} {togoal} {} {} pathforall
+    grestore
+  } for
+  grestore
+  
+  showpage
+  %showrealpage
+} for
+
